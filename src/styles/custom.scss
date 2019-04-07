@@ -1,0 +1,35 @@
+// Override default variables before the import
+$body-bg: Ivory;
+$font-family-base: 'Roboto Light';
+$enable-rounded: true;
+$enable-gradients: false;
+
+.table td, .table th {
+   text-align: center;
+}
+
+.table-my-hover tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-my-hover tr .pop-on-hover{
+    visibility: hidden;
+}
+.table-my-hover tr:hover .pop-on-hover{
+    visibility: visible;
+}
+
+
+
+$theme-colors: (
+    "success-zen": #7eca8f,
+    "danger-zen": #e66f7c,
+    "warning-zen": #ffe181
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+button.btn-round{
+    border-radius: 40px;
+}
