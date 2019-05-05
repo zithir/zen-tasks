@@ -18,8 +18,11 @@ export class Icon extends React.Component {
             case "edit":
                 content = <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
                 break;
+            case "plus":
+                content = <path d="M16 2 L16 30 M2 16 L30 16" />
+                break;
             default:
-            content = <path d="M16 3 L30 29 2 29 Z M16 11 L16 19 M16 23 L16 25" />
+                content = <path d="M16 3 L30 29 2 29 Z M16 11 L16 19 M16 23 L16 25" />
         }
         return content;
     }

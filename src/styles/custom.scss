@@ -33,3 +33,10 @@ $theme-colors: (
 button.btn-round{
     border-radius: 40px;
 }
+
+input.input-text {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+
+}

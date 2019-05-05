@@ -7,6 +7,7 @@ import moment from 'moment'
 import {constants} from './constants'
 
 import {TasksOverview} from './components/TaskOverview'
+import {ToDos} from './components/ToDos/ToDos'
 import {Debugger} from './components/Debugger'
 
 const localstorage = window.localStorage;
@@ -122,14 +123,19 @@ class App extends React.Component {
     render() {
         return (<div className="wrapper">
             <div className="container">
-                <Debugger 
-                changeDate={this.changeDate}
-                uploadTestTasks={this.uploadTestTasks} />
-                <TasksOverview
-                    todaysDate={this.state.todaysDateString}
-                    tasks={this.state.tasks}
-                    handleYNclick={this.handleYNclick}
-                />
+                <div className="card mt-3">
+                    <ToDos/>
+                </div>
+                <div className="card mt-3">
+                    {/* <Debugger 
+                    changeDate={this.changeDate}
+                    uploadTestTasks={this.uploadTestTasks} /> */}
+                    <TasksOverview
+                        todaysDate={this.state.todaysDateString}
+                        tasks={this.state.tasks}
+                        handleYNclick={this.handleYNclick}
+                        />
+                </div>
             </div>
         </div>)
     }
