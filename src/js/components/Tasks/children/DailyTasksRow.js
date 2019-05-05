@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-import {constants} from "../constants"
-import {YXNButtonGroup, EditButton} from "./utils/buttons"
-import {Icon} from './utils/icons'
+import {constants} from "../../../constants"
+import {YXNButtonGroup, EditButton} from "../../../utils/buttons"
+import {Icon} from '../../../utils/icons'
 
 
 /**

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Icon} from '../utils/icons'
+import {Icon} from '../../utils/icons'
 
 export class ToDos extends React.Component{
     constructor(props){
@@ -10,7 +10,7 @@ export class ToDos extends React.Component{
             newTodoField: ""
         }
         this.newTodoFieldUpdate = this.newTodoFieldUpdate.bind(this);
-        this.handleTaskChange = this.handleTaskChange.bind(this);
+        this.handleTodoChange = this.handleTodoChange.bind(this);
         this.newToDoHitEnter = this.newToDoHitEnter.bind(this);
     }
 
@@ -28,11 +28,11 @@ export class ToDos extends React.Component{
 
     newToDoHitEnter(e){
         if (e.key === 'Enter') {
-            this.handleTaskChange.call()
+            this.handleTodoChange.call()
         }
     }
 
-    handleTaskChange(i){
+    handleTodoChange(i){
         let ToDos = this.state.ToDos;
         if (!i){ //in no index is specified, new task is being added
             console.log();            
@@ -71,7 +71,7 @@ export class ToDos extends React.Component{
                         <div className="ml-auto p-2">
                             <button 
                                 className="btn btn-outline-dark btn-sm"    
-                                onClick={() => this.handleTaskChange(i)}
+                                onClick={() => this.handleTodoChange(i)}
                             >
                                 <Icon shape="checkmark"/>
                             </button>
@@ -86,7 +86,6 @@ export class ToDos extends React.Component{
     render(){
         return(
             <div>
-                
                 <div className="row">
                     {this.renderAllToDos()}
                     <div className="col-4">
@@ -110,7 +109,7 @@ export class ToDos extends React.Component{
                                 <button 
                                     className="btn btn-outline-dark btn-sm" 
                                     type="button" 
-                                    onClick={() => this.handleTaskChange()}
+                                    onClick={() => this.handleTodoChange()}
                                     >
                                     <Icon shape="plus" />
                                 </button>

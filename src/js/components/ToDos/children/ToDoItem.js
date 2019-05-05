@@ -13,7 +13,7 @@ render(){
             <div className="ml-auto p-2">
                 <button
                     className="btn btn-outline-dark btn-sm"
-                    onClick={() => this.handleTaskChange(i)}
+                    onClick={() => this.handleTodoChange(i)}
                 >
                     <Icon shape="checkmark" />
                 </button>

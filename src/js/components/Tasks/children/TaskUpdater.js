@@ -37,7 +37,7 @@ renderAllTasksButtons() {
 
 
 /**
- * TaskWithButtons - a component for one task with two buttons
+ * TaskWithButtons - a component for one task with three buttons
  */
 class TaskWithButtons extends React.Component {
     render() {
