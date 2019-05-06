@@ -1,25 +1,70 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Icon } from '...../utils/icons'
 
 export class ToDoItem extends React.Component {
-render(){
-
-    return(
-        <div className="d-flex">
-            <div className="p-2">
-                {this.state.ToDos[i]}
-            </div>
-            <div className="ml-auto p-2">
-                <button
-                    className="btn btn-outline-dark btn-sm"
-                    onClick={() => this.handleTodoChange(i)}
-                >
-                    <Icon shape="checkmark" />
-                </button>
-            </div>
-        </div>
-
-        )
+    constructor(props){
+        super(props);
+        this.state = {
+            openForEdit:false,
+            text: this.props.toDoText
+        }
+        this.editedTodoFieldChange = this.editedTodoFieldChange.bind(this);
+        this.toDoFieldFocusBlur = this.toDoFieldFocusBlur.bind(this);
+        this.text = "";
     }
+    toDoFieldFocusBlur (e, isFocus) {
+        this.setState({openForEdit: isFocus})
+        if (isFocus === false){
+            this.props.fieldUpdate(this.props.index, this.state.text)
+        }
+    }
+    
+    editedTodoFieldChange(e){
+        this.setState({text: e.target.value})
+    }
+
+    componentDidMount(){
+        if (this.props.autoFocus === true){
+            this.nameInput.focus();
+        }
+    }
+    
+    render(){
+        if (this.state.openForEdit === false) {
+            return(
+                <input
+                className="input-text"
+                type="text"
+                ref={(input) => { this.nameInput = input; }}
+                value={this.props.toDoText}
+                onFocus={(e) => {this.toDoFieldFocusBlur(e, true) }}
+                onBlur={(e) => {this.toDoFieldFocusBlur(e, false) }}
+                readOnly
+                >
+            </input>
+            )
+        } else {
+            return(
+                <input
+                    className="input-text open-for-edit"
+                    type="text"
+                    ref={(input) => { this.nameInput = input; }}
+                    value={this.state.text}
+                    onFocus={(e) => {this.toDoFieldFocusBlur(e, true) }}
+                    onBlur={(e) => {this.toDoFieldFocusBlur(e, false) }}
+                    onChange={this.editedTodoFieldChange}
+                    autoFocus={this.props.autoFocus}
+                    onKeyDown={(e) => {this.props.handleKeypress(e, this.props.index)}}
+                    >
+                </input>
+            )
+        }
+    }
+}
+
+ToDoItem.propTypes = {
+    fieldUpdate: PropTypes.func.isRequired,
+    toDoText: PropTypes.string,
+    index: PropTypes.number.isRequired //TODO convert to number
 }

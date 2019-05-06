@@ -1,20 +1,22 @@
 import React from 'react';
 
-import {Icon} from '../../utils/icons'
+import  {Icon } from '../../utils/icons'
+
+import { ToDoItem } from './children/ToDoItem' 
 
 export class ToDos extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            ToDos: this.uploadToDos(),
-            newTodoField: ""
+            ToDos: this.getToDosFromStorage(),
+            editedToDoValue: "",
+            editedToDoIndex: null
         }
-        this.newTodoFieldUpdate = this.newTodoFieldUpdate.bind(this);
-        this.handleTodoChange = this.handleTodoChange.bind(this);
-        this.newToDoHitEnter = this.newToDoHitEnter.bind(this);
+        this.handleKeypress = this.handleKeypress.bind(this);
+        this.toDoFieldUpdate = this.toDoFieldUpdate.bind(this);
     }
 
-    uploadToDos(){
+    getToDosFromStorage(){
         let ToDos = localStorage.getItem("ToDos")
         if (!ToDos) {
             return []
@@ -22,57 +24,67 @@ export class ToDos extends React.Component{
         return JSON.parse(ToDos)
     }
     
-    newTodoFieldUpdate(e){
-        this.setState({newTodoField: e.target.value})
-    }
-
-    newToDoHitEnter(e){
-        if (e.key === 'Enter') {
-            this.handleTodoChange.call()
+    handleKeypress(e, index){
+        if (e.key === 'Enter' && index === this.state.ToDos.length - 1) {
+                this.toDoFieldUpdate();
+                return;
+        } else if (["Enter", "Escape"].includes(e.key)) {
+            document.activeElement.blur()
+            return;
         }
-    }
-
-    handleTodoChange(i){
-        let ToDos = this.state.ToDos;
-        if (!i){ //in no index is specified, new task is being added
-            console.log();            
-            ToDos.push(this.state.newTodoField);
-            this.setState({newTodoField: ""})
-        } else {
-            ToDos.splice(i, 1);
-        }
-        this.updateToDos(ToDos);
-    }
-
-    addNewTask(){
-        let ToDos = this.state.ToDos;
-        ToDos.push("")
-        this.updateToDos(ToDos);
-    }
-
+    } 
+        
     updateToDos (newTodos){
-        this.setState({ ToDos: newTodos })
         localStorage.setItem("ToDos", JSON.stringify(newTodos));      
-
+        this.setState({ ToDos: newTodos })
+        
+    }
+    
+    toDoFieldUpdate (index=-1, text=""){
+        let newToDos = this.state.ToDos.slice(0); //a shallow copy 
+        if (index === -1){
+            console.log("Adding new");
+            newToDos.push("")
+        } else if (text === "") {
+            console.log("Removing");
+            newToDos.splice(index,1);
+        } else {
+            console.log("Updating value");
+            newToDos[parseInt(index)] = text;
+        }
+        this.updateToDos(newToDos);
     }
     
 
     renderAllToDos(){
-        let allTodosElements = []
-        for(let i in this.state.ToDos) {
-            allTodosElements.push(
+        let allToDoElements = []
+        for(let i in this.state.ToDos) {            
+            let autoFocus = false;            
+            if (
+                (parseInt(i) === this.state.ToDos.length - 1)
+                & (this.state.ToDos[i] === "")
+            ) {
+                
+                autoFocus = true;
+            }  
+
+            allToDoElements.push(
                 <div className="col-4" key={i}>
                     <div className="d-flex">
                         <div className="p-2">
-                            <p>
-                            {this.state.ToDos[i]}
-                            </p>
+                            <ToDoItem 
+                                toDoText={this.state.ToDos[i]}
+                                fieldUpdate={this.toDoFieldUpdate}
+                                index={parseInt(i)}
+                                autoFocus={autoFocus}
+                                handleKeypress={this.handleKeypress}
+                                />
                         </div>
-                        <div className="ml-auto p-2">
+                        <div className="p-2">
                             <button 
                                 className="btn btn-outline-dark btn-sm"    
-                                onClick={() => this.handleTodoChange(i)}
-                            >
+                                onClick={() => this.toDoFieldUpdate(i)}
+                                >
                                 <Icon shape="checkmark"/>
                             </button>
                         </div>  
@@ -80,7 +92,7 @@ export class ToDos extends React.Component{
                 </div>
             );
         }
-        return allTodosElements;
+        return allToDoElements;
     }
     
     render(){
@@ -90,26 +102,12 @@ export class ToDos extends React.Component{
                     {this.renderAllToDos()}
                     <div className="col-4">
                         <div className="d-flex">
-                            <div
-                                className="p-2"
-                                style={{width: "100%"}}
-                            >
-                                <input
-                                    className="d-flex p-2 input-text"
-                                    style={{
-                                        width: "100%",
-                                        }}
-                                    type="text"
-                                    onChange={this.newTodoFieldUpdate}
-                                    onKeyPress={this.newToDoHitEnter}
-                                    value={this.state.newTodoField}
-                                ></input>
                             </div>
                             <div className="ml-auto p-2">
                                 <button 
                                     className="btn btn-outline-dark btn-sm" 
                                     type="button" 
-                                    onClick={() => this.handleTodoChange()}
+                                    onClick={() => this.toDoFieldUpdate()}
                                     >
                                     <Icon shape="plus" />
                                 </button>
@@ -117,7 +115,6 @@ export class ToDos extends React.Component{
                         </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }
