@@ -1,6 +1,7 @@
-// Override default variables before the import
+@import '_fonts.scss';
+// Define default variables before the import
 $body-bg: Ivory;
-$font-family-base: 'Roboto Light';
+$font-family-base: 'Roboto Light', sans-serif;
 $enable-rounded: true;
 $enable-gradients: false;
 
@@ -29,6 +30,8 @@ $theme-colors: (
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
+
+// Overwrite the bootstrap
 
 button.btn-round{
     border-radius: 40px;
