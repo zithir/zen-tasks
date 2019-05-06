@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import {constants} from "../../../constants"
 import {DailyTasksRow} from './DailyTasksRow'
 
-
 /**
- * TasksOverview - a component displaying table with staus of old tasks
+ * TasksOverview - table of all tasks
  */
-export class TasksOverview extends React.Component {
 
+export class TasksOverview extends React.Component {
     renderTableHeads() {
         let taskCols = []
         for (let taskName of constants.taskNames) {

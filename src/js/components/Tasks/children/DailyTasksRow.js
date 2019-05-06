@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-
 import {constants} from "../../../constants"
 import {YXNButtonGroup, EditButton} from "../../../utils/buttons"
 import {Icon} from '../../../utils/icons'
@@ -22,7 +20,8 @@ export class DailyTasksRow extends React.Component {
     }
 
     /**
-     * evaluateTask - returns text and className according to task's status
+     * returns text and className according to task's status
+     * 
      * @param task {bool} True, False, Null
      * @return {object}
      */

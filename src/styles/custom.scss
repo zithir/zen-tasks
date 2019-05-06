@@ -42,6 +42,6 @@ input.input-text {
     border: none;
     
 }
-input.open-for-edit{
+input.input-text:focus{
     border-bottom: 1px solid gray;
 }
