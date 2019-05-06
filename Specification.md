@@ -1,4 +1,4 @@
-# Buzzer List
+# Zen-tasks
 A simple app to check if daily tasks have been done. The app will be implemented as a single page application that will store results in cookies, so it will be written in `html + css + JS`
 
 The tasks are defined in `costants.js` file and the app is prepared to renred them dynamically. Basic three tasks are the following: *Time, Body, Mind*. If a new task is added, there are no entries for it in cookies, so it cannot be displayed with results.
@@ -12,4 +12,4 @@ The tasks status can be saved in cookies using the following JS library https://
 
 The app could be rendered and handled by React.
 
-Start with JavaScript and Adopt TypeScript later.
+Start with JavaScript and adopt TypeScript later.

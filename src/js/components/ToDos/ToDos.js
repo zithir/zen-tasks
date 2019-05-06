@@ -45,7 +45,7 @@ export class ToDos extends React.Component{
         if (index === -1){
             console.log("Adding new");
             newToDos.push("")
-        } else if (text === "") {
+        } else if (text === "<remove>") {
             console.log("Removing");
             newToDos.splice(index,1);
         } else {
@@ -83,7 +83,7 @@ export class ToDos extends React.Component{
                         <div className="p-2">
                             <button 
                                 className="btn btn-outline-dark btn-sm"    
-                                onClick={() => this.toDoFieldUpdate(i)}
+                                onClick={() => this.toDoFieldUpdate(i, "<remove>")}
                                 >
                                 <Icon shape="checkmark"/>
                             </button>

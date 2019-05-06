@@ -16,12 +16,12 @@ export class ToDoItem extends React.Component {
     toDoFieldFocusBlur (e, isFocus) {
         this.setState({openForEdit: isFocus})
         if (isFocus === false){
-            this.props.fieldUpdate(this.props.index, this.state.text)
+            this.props.fieldUpdate(this.props.index, e.target.value)
         }
     }
     
     editedTodoFieldChange(e){
-        this.setState({text: e.target.value})
+        this.props.fieldUpdate(this.props.index, e.target.value)
     }
 
     componentDidMount(){
@@ -50,7 +50,7 @@ export class ToDoItem extends React.Component {
                     className="input-text open-for-edit"
                     type="text"
                     ref={(input) => { this.nameInput = input; }}
-                    value={this.state.text}
+                    value={this.props.toDoText}
                     onFocus={(e) => {this.toDoFieldFocusBlur(e, true) }}
                     onBlur={(e) => {this.toDoFieldFocusBlur(e, false) }}
                     onChange={this.editedTodoFieldChange}
