@@ -1,3 +1,26 @@
+# Zen-tasks
+This project is a small single-page application which can be used for tracking fulfilment of repeated **Daily Tasks** as well as individual one-off **ToDos**. It provides a visual feedback on how well you do and this way it enforces the positive habits.
+
+The "zen" signifies that the application tries to help organize everyday's activities but at the same time it should as simple as possible.
+
+The basic purpose of this app is based on the method from the book The End of Procrastination by Peter Ludwig.
+
+## Usage
+If you do not want to customize the Daily Tasks,  simply download the `public` folder and place its contents to the root directory of your system (e.g. C:\\), then you can create a shortcut to `index.html` and run it from anywhere. *Yes, I know this is not a perferct solution, hopefully I will fix this in future*
+
+### ToDos
+Click on the plus to add a new ToDo, then click on checkmark when it is done, that's all. The text of ToDo can be edited after it is created.
+
+### Daily Tasks
+By default, there are three Daily Tasks wich I use: **Time, Body, Mind**.
+ - Time - the effective use of time throughout day (no hangig around, playing games or watching TV series all day)
+ - Body - do something for your body (excercise, eat healthy)
+ - Mind - do something for your mind (educate yourself, read)
+
+If you want o use your own Daily Tasks, you have to edit the value of `taskNames` in `src/js/constants.js` and build the aplication again using `npm run build`.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
